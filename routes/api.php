@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ApplyController;
+use App\Http\Controllers\Api\JobController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+  Route::get('/jobs', [JobController::class, 'index']);
+  Route::post('/jobs', [JobController::class, 'store']);
+
+  Route::get('/apply', [ApplyController::class, 'index']);
+  Route::post('/apply', [ApplyController::class, 'store']);
 });
