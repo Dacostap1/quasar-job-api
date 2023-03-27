@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\PermisionsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,12 +14,8 @@ class DatabaseSeeder extends Seeder
   public function run(): void
   {
 
-    \App\Models\User::factory()->create([
-      'name' => 'Daniel Acosta',
-      'email' => 'admin@hotmail.com',
-      'password' => bcrypt('12345678')
-    ]);
+    \App\Models\Job::factory(1000)->create();
 
-    \App\Models\Job::factory(500)->create();
+    $this->call(PermisionsSeeder::class);
   }
 }

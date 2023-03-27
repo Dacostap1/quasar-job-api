@@ -17,8 +17,9 @@ class ApplyResource extends JsonResource
     return [
       "id" => $this->id,
       "user_id" => $this->user_id,
+      "job_name" => $this->job->title,
       "description" => $this->description,
-
+      "created_at" => $this->created_at,
     ];
   }
 }

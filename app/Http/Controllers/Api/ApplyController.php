@@ -15,10 +15,8 @@ class ApplyController extends Controller
   public function index(Request $request)
   {
     try {
-      // $jobs = Apply::orderBy('created_at', 'desc')->get();
-      // return response()->json(new JobCollection($jobs), 200);
 
-      $applys = Apply::paginate(
+      $applys = Apply::with('job')->where('user_id', auth()->user()->id)->paginate(
         $perPage = request('itemsPerPage'),
         $columns = ['*'],
         $pageName = 'page',
@@ -41,7 +39,6 @@ class ApplyController extends Controller
       'description' => 'required',
       'job_id' => 'required',
     ], []);
-
 
     try {
 
